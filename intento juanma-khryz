@@ -1,0 +1,96 @@
+#include <iostream>
+#include <cstdlib>
+#include<string.h>
+
+using namespace std;
+void mostrarArray (char numero[])
+{
+	int i;
+	for(i=0;i<15;i++)
+	{
+		cout<<numero[i]<<endl;
+	}
+}
+
+void SacarBasura (char numero[],int contador)//elimina la basura que queda en las posiciones vacias
+{
+	int i;
+	for(i=contador;i<15;i++)
+	{
+		numero[i]='\0';
+	}
+}
+void Integrar(int Num_Array[])
+{
+	cout<<"el valor del polinomio integrado es:"<<endl;
+	cout<<"("<<Num_Array[0]<<"*x^"<<Num_Array[1]+1<<")/"<<Num_Array[1]+1<<"+"<<"("<<Num_Array[2]<<"*x^"<<Num_Array[3]+1<<")/"<<Num_Array[3]+1<<"+"<<Num_Array[4]<<"*x"<<endl; 
+}
+void Invertir_Array(int Num_Array[])
+{
+    int i, num_inv[10],j=0;
+    int copia_numero[10];
+	for(i=0;i<10; i++)
+	{
+		num_inv[i]=Num_Array[10-i];
+	}
+	//mostrar(num_inv);
+	
+	for(i=0;i<10;i++)
+	{
+        if (num_inv[i]!='\0')
+        {
+            copia_numero[j] = num_inv[i];
+            j++;
+        }
+    }
+    Integrar(copia_numero);
+    
+}
+void convertir (char numero[])//convierte el arreglo de char y lo guarda en una variable entera
+{
+	int entero,i,Num_Array[10],var;
+	entero = atoi(numero);
+	for (i=0;i<10;i++)
+	{
+		var = entero%10;
+		Num_Array[i]=var;
+		entero= entero/10;
+	}
+	/*for(i=0;i<10;i++)
+	{
+		cout<<Num_Array[i]<<endl; //EL arreglo de los numeros pero ahora tipo int 
+	}*/
+	Invertir_Array(Num_Array);
+	//Integrar(Num_Array);
+	
+}
+
+void Separar (char expresion[],int cantidad)//separa los numeros de los caracteres
+{	
+	int i,j=0,contador=0;
+	char numero[15];
+	for (i=0;i<cantidad;i++)
+	{
+		if (expresion[i] != '*' && expresion[i] != 'x' && expresion[i] != '^' && expresion[i]!= '+')
+		{
+			contador++;
+			numero[j] = expresion[i];
+			j++;
+		}	
+	}
+	SacarBasura(numero,contador);
+	//mostrarArray(numero);
+	convertir(numero);	
+}
+
+int main ()
+{
+	char expresion[15];
+	int valor[15],cantidad;
+	cout<< "ingrese cadena"<<endl<<"ejemplo: 2*x^2+3*x^1+2"<<endl;
+	cin>> expresion;	
+	cantidad = strlen(expresion);//cantidad de caracteres tiene la expresion
+	Separar(expresion,cantidad);
+	//cout<<"la cantidad de caracteres es:"<<ends<<cantidad<<endl;
+	system("pause");
+}
