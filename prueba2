@@ -3,7 +3,23 @@
 #include<string.h>
 
 using namespace std;
-
+void mostrar(char mu[],int o)
+{
+    int t=0;
+    int conta=0;
+    while(mu[t]!=' ')
+    {
+        conta++;
+        t++;
+    }
+    t=0;
+    while(t<conta)
+    {
+        cout<<mu[t];
+        t++;
+    }
+cout<<' ';
+}
 void analizar (char expresion[],int cantidad)//calcula la cantidad de signos negativos o positivos en el arreglo para saber cuantos nomios existen
 {
 	int i=0,j=0,grado=0,contador=-1;
@@ -32,17 +48,18 @@ void analizar (char expresion[],int cantidad)//calcula la cantidad de signos neg
                 if(expresion[i+3]=='^')
                 {
                     integra[j]=expresion[i];
+                    j++;
                     grado=expresion[i+4];        // constante*variable^contaste
-                    integra[j+1]='*';
-                    integra[j+2]='x';
-                    integra[j+3]='^';
-                    integra[j+4]=grado+1;
-                    integra[j+5]='/';
-                    integra[j+6]=grado+1;
-                    integra[j+7]=' ';
+                    integra[j]='*';
+                    integra[j+1]='x';
+                    integra[j+2]='^';
+                    integra[j+3]=grado+1;
+                    integra[j+4]='/';
+                    integra[j+5]=grado+1;
+                    integra[j+6]=' ';
 
                     i=6+i;
-                    
+                    mostrar(integra,6);
 
                 }
                 else
@@ -61,7 +78,7 @@ void analizar (char expresion[],int cantidad)//calcula la cantidad de signos neg
                     integra[j+6]=' ';
                     j=j+7;
                     i=4+i;
-                    
+                    mostrar(integra,4);
                     }
                 }
 
@@ -79,7 +96,7 @@ void analizar (char expresion[],int cantidad)//calcula la cantidad de signos neg
                     integra[j+5]=' ';
                     j=j+5;
                     i=4+i;
-                   
+                    mostrar(integra,4);
 
                 }
                 else
@@ -92,7 +109,7 @@ void analizar (char expresion[],int cantidad)//calcula la cantidad de signos neg
                     integra[j+5]=' ';
 
                     i=2+i;
-                  
+                    mostrar(integra,2);
 
                 }
             }
