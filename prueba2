@@ -1,0 +1,122 @@
+#include <iostream>
+#include <cstdlib>
+#include<string.h>
+
+using namespace std;
+
+void analizar (char expresion[],int cantidad)//calcula la cantidad de signos negativos o positivos en el arreglo para saber cuantos nomios existen
+{
+	int i=0,j=0,grado=0,contador=-1;
+	char integra[30];
+    int numsigno=0;
+    while(i<cantidad)
+    {
+        if(expresion[i]=='+' || expresion[i]=='-')
+        {
+            numsigno++;
+        }
+        i++;
+
+    }
+
+    i=0;
+
+
+
+    while( contador < numsigno )   // integra segun 4 criterios
+    {
+		    if(expresion[i]=='2' || expresion[i]=='3' || expresion[i]=='4' || expresion[i]=='5' || expresion[i]=='6' || expresion[i]=='7' || expresion[i]=='8')
+            {
+
+
+                if(expresion[i+3]=='^')
+                {
+                    integra[j]=expresion[i];
+                    grado=expresion[i+4];        // constante*variable^contaste
+                    integra[j+1]='*';
+                    integra[j+2]='x';
+                    integra[j+3]='^';
+                    integra[j+4]=grado+1;
+                    integra[j+5]='/';
+                    integra[j+6]=grado+1;
+                    integra[j+7]=' ';
+
+                    i=6+i;
+                    
+
+                }
+                else
+                {
+                    if(expresion[i+1]=='*')
+                    {
+                    integra[j]=expresion[i];
+                    j++;
+                    grado=expresion[i+4];
+                    integra[j]='*';                  //constante*variable
+                    integra[j+1]='x';
+                    integra[j+2]='^';
+                    integra[j+3]=grado+1;
+                    integra[j+4]='/';
+                    integra[j+5]=grado+1;
+                    integra[j+6]=' ';
+                    j=j+7;
+                    i=4+i;
+                    
+                    }
+                }
+
+            }
+            else
+            {
+                if(expresion[i+1]== '^')
+                {
+                    grado=expresion[i+2];            //variable^contasnte
+                    integra[j]='x';
+                    integra[j+1]='^';
+                    integra[j+2]=grado+1;
+                    integra[j+3]='/';
+                    integra[j+4]=grado+1;
+                    integra[j+5]=' ';
+                    j=j+5;
+                    i=4+i;
+                   
+
+                }
+                else
+                {
+                    integra[j]='x';         // variable sola
+                    integra[j+1]='^';
+                    integra[j+2]='2';
+                    integra[j+3]='/';
+                    integra[j+4]='2';
+                    integra[j+5]=' ';
+
+                    i=2+i;
+                  
+
+                }
+            }
+         contador++;
+         j=j+2;;
+    }
+    integra[j-1]=' ';
+    integra[j-2]='.';
+
+}
+
+
+
+
+
+int main ()
+{
+	char expresion[30];
+	int cantidad;
+	cout<< "ingrese cadena"<<endl;
+	cin>> expresion;
+	cantidad = strlen(expresion);//cantidad de caracteres tiene la expresion
+	analizar(expresion,cantidad);
+	//cout<<"la cantidad de caracteres es:"<<ends<<cantidad<<endl;
+
+	system("pause");
+}
